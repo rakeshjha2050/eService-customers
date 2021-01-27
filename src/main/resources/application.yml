@@ -1,0 +1,50 @@
+custribbon:
+    ribbon:
+        eureka:
+            enabled: false
+        listOfServers: http://localhost:8301,http://localhost:8300
+eureka:
+    client:
+        service-url:
+            defaultZone: http://localhost:2222/eureka
+    instance:
+        lease-expiration-duration-in-seconds: 5
+        lease-renewal-interval-in-seconds: 2
+    server:
+        enableSelfPreservation: false
+hystrix:
+    command:
+        default:
+            circuitBreaker:
+                errorThresholdPercentage: 50
+                requestVolumeThreshold: 100
+                sleepWindowInMilliseconds: 10000000
+            execution:
+                timeout:
+                    enabled: false
+            metrics:
+                rollingStats:
+                    timeInMilliseconds: 10000
+    metrics:
+        rollingStats:
+            timeInMilliseconds: 10000000
+logging:
+    file:
+        name: customerLog.log
+    level:
+        com:
+            eService:
+                customers: INFO
+        org:
+            springframework: ERROR
+    pattern:
+        console: '%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n'
+        file: '%d %p %c{1.} [%t] %m%n'
+server:
+    error:
+        whitelabel:
+            enabled: false
+    port: 3333
+spring:
+    application:
+        name: eServiceCustomers
